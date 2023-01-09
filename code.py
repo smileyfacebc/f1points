@@ -1,6 +1,8 @@
 import json
 import os
 
+previous_scores_file = "previous_scores.json"
+
 
 class Constructor:
     def __init__(self, drivers: list, WCC_points: int):
@@ -14,8 +16,8 @@ class Constructor:
 
 
 #loading from previous iteration
-if os.path.exists("derp.json"):
-    with open("derp.json", 'r') as loaded_derp:
+if os.path.exists(previous_scores_file):
+    with open(previous_scores_file, 'r') as loaded_derp:
         imported_data = json.load(loaded_derp)
     #Rebuilding the class dictionary from 'derp.json
     f1_constructors = {name: Constructor(value['drivers'], value['WCC_points']) for name, value in imported_data.items()}
@@ -66,6 +68,6 @@ for constructor_name, constructor in f1_constructors.items():
 
 
 #saving the list to json file
-with open("derp.json", "w") as save_data_file:
+with open(previous_scores_file, "w") as save_data_file:
     json.dump({constructor_name: constructor.to_dict() for constructor_name, constructor in f1_constructors.items()}, save_data_file)
 
