@@ -65,6 +65,6 @@ for constructor_name, constructor in f1_constructors.items():
 
 
 #saving the list to json file
-with open(previous_scores_file, "w") as save_data_file:
+with open(previous_scores_file, "w+") as save_data_file:
     json.dump({constructor_name: constructor.to_dict() for constructor_name, constructor in f1_constructors.items()}, save_data_file)
 
