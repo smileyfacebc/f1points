@@ -21,9 +21,6 @@ if os.path.exists(previous_scores_file):
         imported_data = json.load(loaded_derp)
     #Rebuilding the class dictionary from 'derp.json
     f1_constructors = {name: Constructor(value['drivers'], value['WCC_points']) for name, value in imported_data.items()}
-
-
-
 else:
     # F1 teams:
     #this is made if json file doesn't exist
