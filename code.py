@@ -55,13 +55,13 @@ for driver in list(zip(loaded_results, Points_Position)):
 
 
 #creating the list for teams and their points
-for constructor_name, constructor in f1_constructors.items():
-        #print(f'{constructor_name} has {constructor.WCC_points} points')
+for constructor_name, constructor in sorted(f1_constructors.items(), key=lambda name, obj: Constructor.WCC_points, reverse= True):
+        print(f'{constructor_name} has {constructor.WCC_points} points')
         #print(f1_constructors.items())
         #sorted_f1 = sorted(f1_constructors.items(), key=lambda x:x[1])
         #sorted_f1_dict = dict(sorted_f1)
         #print(sorted_f1)
-        print(f'{constructor_name} has {sorted(dir(str(constructor.WCC_points)))} points')
+        #print(f'{constructor_name} has {sorted(dir(str(constructor.WCC_points)))} points')
 
 
 #saving the list to json file
