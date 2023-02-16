@@ -16,9 +16,10 @@ class Constructor:
 
 #new edit
 class Driver:
-    def __init__(self, drivers_championship: int):
+    def __init__(self, abreviated_name, drivers_championship: int):
         self.drivers_championship = drivers_championship
-        
+        self.abreviated_name = abreviated_name
+
     def to_dict(self):
         return {'driver': self.drivers_championship}
 
@@ -53,10 +54,10 @@ if os.path.exists(previous_drivers_championship_file):
     with open(previous_drivers_championship_file, 'r')as loaded_drivers:
         imported_drivers_data = json.load(loaded_drivers)
 
-    f1_drivers = {name: Driver(value, value['drivers_championship']) for name, value in imported_drivers_data.items()}
+    f1_drivers = {name: Driver(value['abreviated_name'], value['drivers_championship']) for name, value in imported_drivers_data.items()}
 else:
     #make this
-    #__________________ Cory, I was trying to have 'lewis Hamilton' = 'Ham' and associate the points from race results. 
+    #__________________ Cory, I was trying to have 'lewis Hamilton' = 'Ham' and associate the points from race results.
     # am I trying to do too much in one step for this program? or is there a better way?
     f1_drivers = {
         'Lewis Hamilton' : Driver('Ham', 0),
@@ -104,7 +105,7 @@ for driver in list(zip(loaded_results, Points_Position)):
 #new edit
 for driver_result in list(zip(loaded_results, Points_Position)):
     for driver_name in f1_drivers:
-        if driver_result[0] in  f1_drivers[driver_name].drivers_championship:
+        if driver_result[0] in  f1_drivers[driver_name].abreviated_name:
             f1_drivers[driver_name].drivers_championship += driver_result[1]
             break
 
@@ -127,4 +128,4 @@ with open(previous_constructor_score_file, "w+") as save_data_file:
 
 #WDC points
 with open(previous_drivers_championship_file, "w+") as save_driver_championship_file:
-    json.dump({driver_name: Driver.to_dict() for driver_name, driver in f1_drivers.items()}, save_driver_championship_file)
+    json.dump({driver_name: driver.to_dict() for driver_name, driver in f1_drivers.items()}, save_driver_championship_file)
