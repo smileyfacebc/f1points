@@ -16,12 +16,12 @@ class Constructor:
 
 #new edit
 class Driver:
-    def __init__(self, abreviated_name, drivers_championship: int):
+    def __init__(self, abreviated_name: list, drivers_championship: int):
         self.drivers_championship = drivers_championship
         self.abreviated_name = abreviated_name
 
     def to_dict(self):
-        return {'driver': self.drivers_championship}
+        return {'abreviated_name': self.abreviated_name, 'driver': self.drivers_championship }
 
 
 
@@ -57,8 +57,7 @@ if os.path.exists(previous_drivers_championship_file):
     f1_drivers = {name: Driver(value['abreviated_name'], value['drivers_championship']) for name, value in imported_drivers_data.items()}
 else:
     #make this
-    #__________________ Cory, I was trying to have 'lewis Hamilton' = 'Ham' and associate the points from race results.
-    # am I trying to do too much in one step for this program? or is there a better way?
+
     f1_drivers = {
         'Lewis Hamilton' : Driver('Ham', 0),
         'George Russel' : Driver('Rus', 0),
